@@ -6,6 +6,9 @@ import * as serviceWorker from "./serviceWorker";
 import { AuthProvider } from "react-oidc-context" ;
 import history from "./utils/history";
 // import { getConfig } from "./config";
+// eslint-disable-next-line
+import { useAuth } from "react-oidc-context";
+
 
 const onRedirectCallback = (appState) => {
   history.push(

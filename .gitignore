@@ -8,3 +8,4 @@ build
 /oauth_component/frontend/build/
 /oidc_component/frontend/build/
 .idea
+/oidc_component/frontend/target/

@@ -5,6 +5,7 @@ import { useAuth ,withAuth} from 'react-oidc-context';
 export const ProfileComponent = () => {
   const { user } = useAuth();
 
+  
   return (
     <Container className="mb-5">
     </Container>

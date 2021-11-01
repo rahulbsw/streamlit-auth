@@ -1,23 +1,12 @@
 import React from "react";
-import { NavLink as RouterNavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // styles
 import "./NavBar.css";
 // eslint-disable-next-line
 import {
   Container,
-  Nav,
-  NavItem,
   Button,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
 } from "reactstrap";
 
-import {
-  Streamlit
-} from "streamlit-component-lib"
 
 // eslint-disable-next-line
 import { useAuth } from "react-oidc-context";
@@ -31,6 +20,9 @@ const NavBar = (props) => {
   const {
     user,
     isAuthenticated,
+    isLoading,
+    error,
+    removeUser,
     signinRedirect,
     signinPopup,
     signoutRedirect
@@ -58,28 +50,33 @@ const NavBar = (props) => {
         onRun(false)
   }
 
+   function show() {
+   
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
+    if (error) {
+        return <div>Oops... {error.message}</div>
+    }
+
+    if (isAuthenticated) {
+        return (
+            <div>
+                Hello {user?.profile.sub}{" "}
+                <button onClick={removeUser}>
+                    Log out
+                </button>
+            </div>
+        )
+    }
+
+    return <button onClick={signinRedirect}>Log in</button>
+}
   return (
     <div className="nav-container">
       <Container className="login-component">
-            {!isAuthenticated && (
-                <Button
-                  color="primary"
-                  className="btn-margin"
-                  onClick={() => {
-                      signinPopup({popup_redirect_uri: window.location.origin}).then(()=>{onRun(false)})
-                }}
-                >
-                  Log in
-                </Button>
-            )}
-            {isAuthenticated && (
-                <Button
-                onClick={() => {
-                    logoutWithRedirect()
-                  }}
-                >Logout
-                </Button>
-            )}
+            {show()}
       </Container>
     </div>
   );

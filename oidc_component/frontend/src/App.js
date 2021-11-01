@@ -55,16 +55,18 @@ class App extends StreamlitComponentBase {
       onSignIn: async (user) => {
         alert('You just signed in, congratz! Check out the console!');
         console.log(user);
-        //window.location.hash = '';
+        window.location.hash = '';
       },
        authority: this.props['args']['auth_setup']['authority'],
-       clientId: this.props['args']['auth_setup']['clientId'],
-       clientSecret: this.props['args']['auth_setup']['clientSecret'],
+       client_id: this.props['args']['auth_setup']['clientId'],
+       client_secret: this.props['args']['auth_setup']['clientSecret'],
        scope: this.props['args']['auth_setup']['scope'],
-      responseType: 'id_token',
-      redirectUri: window.location.origin,
+       response_type: 'id_token',
+       response_mode : 'form_post',
+       redirect_uri: window.location.origin,
     };
 
+    
 
   render(){
     return (
