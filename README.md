@@ -1,14 +1,14 @@
-# Welcome to OIDC-Streamlit
+# Welcome to Auth-Streamlit
 
 **The fastest way to provide comprehensive login inside Streamlit**
 
 
 
 ## Installation
-`pip install streamlit-oidc-component`
+`pip install streamlit-auth-component`
 
 ## An example
-On OpenId website start a "Single Page Web Application" and copy your client-id / domain (of form xxxx.us.auth0.com) into code below.
+* On OpenId website start a "Single Page Web Application" and copy your oidc properties from oidc provider.
 
 ```
 from oidc_component import login_button
@@ -23,6 +23,20 @@ user_info = login_button(clientId=clientId,clientSecret=clientSecret, authority 
 st.write(user_info)
 ```
 
+* On OAuth website start a "Single Page Web Application" and copy your OAuth properties from OAuth provider.
+
+```
+from oauth_component import login_button
+import streamlit as st
+
+clientId = "...."
+clientSecret = "...."
+provider = "...."
+scope = "...."
+
+user_info = login_button(clientId=clientId,clientSecret=clientSecret, provider = provider,scope=scope)
+st.write(user_info)
+```
 `user_info` will now contain your user's information 
 
 ## Build Instruction
