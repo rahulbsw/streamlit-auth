@@ -54,22 +54,22 @@ from jose import jwt
 #
 #         return payload['sub']
 
-def login_button(clientId,clientSecret, authority,scope,key="oidc-auth", **kwargs):
+def login_button(clientId,clientSecret, provider,scope,key="oauth2-auth", **kwargs):
     """Create a new instance of "login_button".
 
     Parameters
     ----------
     clientId: str
-        client_id per odic config on your Applications
+        client_id per oauth2 config on your Applications
     
     clientSecret: str
-        clientSecret per odic config on your Applications
+        clientSecret per oauth2 config on your Applications
 
-    authority:str
-        authority/issuer per odic config on your Applications
+    provider:str
+        authority/issuer per oauth2 config on your Applications
 
     scope:str
-        scope per odic config on your Applications
+        scope per oauth2 config on your Applications
 
     key: str or None
         An optional key that uniquely identifies this component. If this is
@@ -84,21 +84,21 @@ def login_button(clientId,clientSecret, authority,scope,key="oidc-auth", **kwarg
     """
     user_info = _login_button(auth_setup = {'clientId': clientId,
                                             "clientSecret": clientSecret,
-                                            "authority" : authority,
+                                            "provider" : provider,
                                             "scope" :scope
                                             },
                               key=key,
                               default=0)
     if not user_info:
         return False
-    elif isAuth(response = user_info, authority = authority):
+    elif isAuth(response = user_info, provider = provider):
         return user_info
     else:
         print('Auth failed: invalid token')
         raise 
 
-def isAuth(response,authority):
-    if (response!=None and response['token']!=None and response['data']!=None):
+def isAuth(response,provider):
+    if (response!=None and response['token']!=None):
         return True
     else:
         return False
@@ -110,12 +110,12 @@ if not _RELEASE:
     import os
     load_dotenv()
 
-    authority = os.environ['authority']  # 'https://oidc.io/oauth',
+    provider = os.environ['provider']  # 'https://oidc.io/oauth',
     clientId = os.environ['clientId']
     clientSecret = os.environ['clientSecret']
     scope = os.environ['scope']
     st.subheader("Login component")
-    user_info = login_button(clientId,clientSecret, authority,scope)
+    user_info = login_button(clientId,clientSecret, provider , scope)
     # user_info = login_button(clientId = "...", domain = "...")
     st.write('User info')
     st.write(user_info)

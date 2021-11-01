@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="streamlit-oidc-component",
+    name="streamlit-auth-component",
     version="0.0.1",
     author="Rahul Jain",
     author_email="",

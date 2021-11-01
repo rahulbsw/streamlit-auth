@@ -98,7 +98,7 @@ def login_button(clientId,clientSecret, authority,scope,key="oidc-auth", **kwarg
         raise 
 
 def isAuth(response,authority):
-    if (response!=None and response['token']!=None and response['data']!=None):
+    if (response!=None and response['token']!=None):
         return True
     else:
         return False

@@ -1,1 +1,2 @@
 recursive-include oidc_component/frontend/build *
+recursive-include oauth_component/frontend/build *

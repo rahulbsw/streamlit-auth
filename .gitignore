@@ -3,4 +3,8 @@ venv
 node_modules
 __pycache__
 dist
-streamlit_oidc_component.egg-info
+streamlit_auth_component.egg-info
+build
+/oauth_component/frontend/build/
+/oidc_component/frontend/build/
+.idea
